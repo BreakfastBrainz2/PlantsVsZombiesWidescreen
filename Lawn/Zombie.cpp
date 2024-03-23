@@ -9274,44 +9274,49 @@ void Zombie::UpdateMowered()
 //0x533F70
 bool Zombie::HasShadow()
 {
-    if (mZombiePhase == ZombiePhase::PHASE_ZOMBIE_DYING ||
-        mZombiePhase == ZombiePhase::PHASE_DIGGER_RISING ||
-        mZombiePhase == ZombiePhase::PHASE_DIGGER_TUNNELING_PAUSE_WITHOUT_AXE ||
-        mZombiePhase == ZombiePhase::PHASE_DIGGER_RISE_WITHOUT_AXE ||
-        mZombiePhase == ZombiePhase::PHASE_DIGGER_TUNNELING ||
-        mZombiePhase == ZombiePhase::PHASE_RISING_FROM_GRAVE ||
-        mZombiePhase == ZombiePhase::PHASE_DANCER_RISING ||
-        mZombiePhase == ZombiePhase::PHASE_BOBSLED_BOARDING ||
-        mZombiePhase == ZombiePhase::PHASE_POLEVAULTER_IN_VAULT ||
-        mZombiePhase == ZombiePhase::PHASE_DOLPHIN_INTO_POOL ||
-        mZombiePhase == ZombiePhase::PHASE_SNORKEL_INTO_POOL)
-        return false;
-
-    if (mZombieType == ZombieType::ZOMBIE_ZAMBONI ||
-        mZombieType == ZombieType::ZOMBIE_CATAPULT ||
-        mZombieType == ZombieType::ZOMBIE_BOSS)
-        return false;
-
-    if (mZombieType == ZombieType::ZOMBIE_BUNGEE)
+    if (mZombiePhase == PHASE_ZOMBIE_DYING
+        || mZombiePhase == PHASE_DIGGER_RISING
+        || mZombiePhase == PHASE_DIGGER_TUNNELING_PAUSE_WITHOUT_AXE
+        || mZombiePhase == PHASE_DIGGER_RISE_WITHOUT_AXE
+        || mZombiePhase == PHASE_DIGGER_TUNNELING
+        || mZombiePhase == PHASE_RISING_FROM_GRAVE
+        || mZombiePhase == PHASE_DANCER_RISING
+        || mZombiePhase == PHASE_BOBSLED_BOARDING
+        || mZombiePhase == PHASE_POLEVAULTER_IN_VAULT
+        || mZombiePhase == PHASE_DOLPHIN_INTO_POOL
+        || mZombiePhase == PHASE_SNORKEL_INTO_POOL)
     {
-        if (!IsOnBoard() || mHitUmbrella)
-        {
-            return false;
-        }
+        return false;
     }
 
-    if (mZombieHeight == ZombieHeight::HEIGHT_DRAGGED_UNDER ||
-        mZombieHeight == ZombieHeight::HEIGHT_IN_TO_CHIMNEY ||
-        mZombieHeight == ZombieHeight::HEIGHT_GETTING_BUNGEE_DROPPED)
+    if (mZombieType == ZOMBIE_ZAMBONI
+        || mZombieType == ZOMBIE_CATAPULT
+        || mZombieType == ZOMBIE_BOSS)
+    {
         return false;
+    }
 
-    if (mInPool)
+    if (mZombieType == ZOMBIE_BUNGEE && (!IsOnBoard() || mHitUmbrella))
+    {
         return false;
+    }
 
-    if (Zombie::IsOnBoard() || mApp->mGameMode == GAMEMODE_CHALLENGE_ZOMBIQUARIUM)
+    if (mZombieHeight == HEIGHT_DRAGGED_UNDER
+        || mZombieHeight == HEIGHT_IN_TO_CHIMNEY
+        || mZombieHeight == HEIGHT_GETTING_BUNGEE_DROPPED
+        || mInPool)
+    {
         return false;
+    }
 
-    return mApp->mGameMode != GameMode::GAMEMODE_CHALLENGE_INVISIGHOUL || mFromWave == Zombie::ZOMBIE_WAVE_UI;
+    if ((IsOnBoard() && mApp->mGameMode == GAMEMODE_CHALLENGE_ZOMBIQUARIUM)
+        ||
+        (mApp->mGameMode == GAMEMODE_CHALLENGE_INVISIGHOUL && mFromWave != ZOMBIE_WAVE_UI))
+    {
+        return false;
+    }
+
+    return true;
 }
 
 //0x534040
