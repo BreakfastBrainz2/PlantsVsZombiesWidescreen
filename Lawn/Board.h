@@ -131,6 +131,8 @@ public:
 	int								mSpecialGraveStoneY;									//+0x5CC
 	float							mFogOffset;												//+0x5D0
 	int								mFogBlownCountDown;										//+0x5D4
+	int								mRoofPoleOffset;
+	ReanimationID					mBushReanimIDs[5];
 	PlantRowType					mPlantRow[MAX_GRID_SIZE_Y];								//+0x5D8
 	int								mWaveRowGotLawnMowered[MAX_GRID_SIZE_Y];				//+0x5F0
 	int								mBonusLawnMowersRemaining;								//+0x608
