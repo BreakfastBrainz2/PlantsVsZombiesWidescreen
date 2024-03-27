@@ -261,6 +261,7 @@ public:
 	void							UpdateLayers();
 	virtual void					Draw(Graphics* g);
 	void							DrawBackdrop(Graphics* g);
+	void							DrawCover(Graphics* g);
 	virtual void					ButtonMouseEnter(int theId) { ; }
 	virtual void					ButtonMouseLeave(int theId) { ; }
 	virtual void					ButtonPress(int theId) { ; }

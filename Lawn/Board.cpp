@@ -5998,6 +5998,22 @@ void Board::DrawIce(Graphics* g, int theGridY)
 	g->SetColorizeImages(false);
 }
 
+void Board::DrawCover(Graphics* g)
+{
+	switch (mBackground)
+	{
+	case BACKGROUND_1_DAY:
+		//g->DrawImage(Sexy::IMAGE_BACKGROUND1_COVER, 684, 557);
+		break;
+	case BackgroundType::BACKGROUND_5_ROOF:
+	{
+		g->DrawImage(Sexy::IMAGE_ROOF_TREES, mRoofPoleOffset * 2.0 + 628, -BOARD_OFFSET_Y);
+		g->DrawImage(Sexy::IMAGE_ROOF_POLE, mRoofPoleOffset * 1.5 + 628, -BOARD_OFFSET_Y);
+		break;
+	}
+	}
+}
+
 //0x416290
 void Board::DrawBackdrop(Graphics* g)
 {
@@ -6400,6 +6416,7 @@ void Board::DrawGameObjects(Graphics* g)
 		}
 
 		AddUIRenderItem(aRenderList, aRenderItemCount, RenderObjectType::RENDER_ITEM_BACKDROP, MakeRenderOrder(RenderLayer::RENDER_LAYER_UI_BOTTOM, 0, 0));
+		AddUIRenderItem(aRenderList, aRenderItemCount, RenderObjectType::RENDER_ITEM_COVER, MakeRenderOrder(RenderLayer::RENDER_LAYER_COVER, 0, 0));
 		AddUIRenderItem(aRenderList, aRenderItemCount, RenderObjectType::RENDER_ITEM_BOTTOM_UI, aZPos);
 		AddUIRenderItem(aRenderList, aRenderItemCount, RenderObjectType::RENDER_ITEM_COIN_BANK, MakeRenderOrder(RenderLayer::RENDER_LAYER_COIN_BANK, 0, 0));
 		AddUIRenderItem(aRenderList, aRenderItemCount, RenderObjectType::RENDER_ITEM_TOP_UI, MakeRenderOrder(RenderLayer::RENDER_LAYER_UI_TOP, 0, 0));
@@ -6599,6 +6616,10 @@ void Board::DrawGameObjects(Graphics* g)
 
 		case RenderObjectType::RENDER_ITEM_BACKDROP:
 			DrawBackdrop(g);
+			break;
+
+		case RenderObjectType::RENDER_ITEM_COVER:
+			DrawCover(g);
 			break;
 
 		case RenderObjectType::RENDER_ITEM_DOOR_MASK:

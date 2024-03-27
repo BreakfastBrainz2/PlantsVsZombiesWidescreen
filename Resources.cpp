@@ -211,6 +211,8 @@ bool Sexy::ExtractDelayLoad_Background4Resources(ResourceManager* theManager)
 // DelayLoad_Background5 Resources
 Image* Sexy::IMAGE_BACKGROUND5;
 Image* Sexy::IMAGE_BACKGROUND5_GAMEOVER_MASK;
+Image* Sexy::IMAGE_ROOF_POLE;
+Image* Sexy::IMAGE_ROOF_TREES;
 
 bool Sexy::ExtractDelayLoad_Background5Resources(ResourceManager* theManager)
 {
@@ -221,6 +223,8 @@ bool Sexy::ExtractDelayLoad_Background5Resources(ResourceManager* theManager)
 	{
 		IMAGE_BACKGROUND5 = aMgr.GetImageThrow("IMAGE_BACKGROUND5");
 		IMAGE_BACKGROUND5_GAMEOVER_MASK = aMgr.GetImageThrow("IMAGE_BACKGROUND5_GAMEOVER_MASK");
+		IMAGE_ROOF_POLE = aMgr.GetImageThrow("IMAGE_ROOF_POLE");
+		IMAGE_ROOF_TREES = aMgr.GetImageThrow("IMAGE_ROOF_TREES");
 	}
 	catch (ResourceManagerException&)
 	{
